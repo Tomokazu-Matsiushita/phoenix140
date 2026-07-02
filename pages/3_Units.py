@@ -35,6 +35,6 @@ with st.expander("＋部屋を追加", expanded=False):
                 s.commit()
             st.success("部屋を追加しました。画面を再読み込みしてください。")
 
-st.dataframe(target[["room_no","rent","management_fee","parking_fee","occupied"]], use_container_width=True, hide_index=True)
+st.dataframe(target[["room_no","rent","management_fee","parking_fee","occupied"]], width="stretch", hide_index=True)
 if not target.empty:
     st.metric("稼働率", f"{target['occupied'].mean()*100:.1f}%")

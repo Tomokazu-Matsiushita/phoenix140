@@ -46,7 +46,7 @@ with left:
         {"区分": "現預金", "金額": metrics["cash"]},
     ])
     fig = px.pie(asset_mix, names="区分", values="金額", hole=0.45)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 with right:
     st.subheader("AI CFO Memo")

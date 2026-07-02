@@ -42,6 +42,6 @@ df = monthly_cf_df()
 if not df.empty:
     df["net_cf"] = df["rent_income"] - df["loan_payment"] - df["management_fee"] - df["repair_cost"] - df["tax_cost"] - df["other_cost"]
     st.metric("登録済みCF合計", yen(df["net_cf"].sum()))
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True)
 else:
     st.info("まだ月次収支の登録がありません。")

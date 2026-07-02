@@ -24,11 +24,11 @@ c3.metric("銘柄・口座数", len(df))
 tab1, tab2, tab3 = st.tabs(["一覧", "構成", "API連携"])
 
 with tab1:
-    st.dataframe(df[["institution","account_name","asset_type","name","sector","quantity","value","annual_dividend","policy","source"]], use_container_width=True, hide_index=True)
+    st.dataframe(df[["institution","account_name","asset_type","name","sector","quantity","value","annual_dividend","policy","source"]], width="stretch", hide_index=True)
 
 with tab2:
     fig = px.pie(df.groupby("asset_type", as_index=False)["value"].sum(), names="asset_type", values="value", hole=0.45)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 with tab3:
     st.info("Moneytree APIの公式認証情報が準備できたら、connectors/moneytree.py を実装します。")

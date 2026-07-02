@@ -45,8 +45,8 @@ c1.metric("物件数", f"{len(props)}棟")
 c2.metric("総戸数", f"{int(props['units'].sum()) if not props.empty else 0}戸")
 c3.metric("月返済合計", yen(props["monthly_payment"].sum() if not props.empty else 0))
 
-st.dataframe(props, use_container_width=True, hide_index=True)
+st.dataframe(props, width="stretch", hide_index=True)
 
 if not props.empty:
     fig = px.bar(props, x="name", y="loan_balance", title="物件別残債")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
