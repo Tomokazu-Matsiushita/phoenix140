@@ -50,3 +50,6 @@ echo "Service check passed."
 
 exit_result = ExitIRRService().evaluate(ExitIRRInput())
 print("Exit IRR sample:", exit_result["irr"])
+
+real_estate_ai_review = RealEstateAICFOService().full_review()
+print("Real Estate AI CFO comments:", len(real_estate_ai_review["comments"]))

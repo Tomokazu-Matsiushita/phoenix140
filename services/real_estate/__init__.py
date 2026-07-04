@@ -5,4 +5,5 @@ from services.real_estate.property_metrics_service import PropertyMetricsService
 from services.real_estate.loan_dscr_service import LoanDSCRService
 from services.real_estate.property_acquisition_service import AcquisitionInput, PropertyAcquisitionService
 from services.real_estate.exit_irr_service import ExitIRRInput, ExitIRRService
+from services.real_estate.real_estate_ai_cfo_service import CFOComment, RealEstateAICFOService
 
