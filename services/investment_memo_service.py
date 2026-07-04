@@ -203,7 +203,7 @@ class InvestmentMemoService:
                 "liquidity_score",
             ]
             scenario_table = scenario_review[[c for c in cols if c in scenario_review.columns]].copy()
-            lines.append(scenario_table.to_markdown(index=False))
+            lines.append(self._dataframe_to_markdown(scenario_table))
         else:
             lines.append("シナリオ比較データがありません。")
         lines.append("")
@@ -260,6 +260,35 @@ class InvestmentMemoService:
             df.to_csv(path, index=False, encoding="utf-8-sig")
             paths.append(path)
         return paths
+
+    @staticmethod
+    def _dataframe_to_markdown(df: pd.DataFrame) -> str:
+        if df is None or df.empty:
+            return "データがありません。"
+
+        def fmt(value: Any) -> str:
+            try:
+                if value is None or pd.isna(value):
+                    return "-"
+            except Exception:
+                pass
+
+            if isinstance(value, float):
+                text = f"{value:,.2f}"
+            else:
+                text = str(value)
+
+            return text.replace("|", "\\|").replace("\n", " ")
+
+        columns = [str(c) for c in df.columns]
+        header = "| " + " | ".join(columns) + " |"
+        separator = "| " + " | ".join(["---"] * len(columns)) + " |"
+
+        rows = []
+        for _, row in df.iterrows():
+            rows.append("| " + " | ".join(fmt(row[col]) for col in df.columns) + " |")
+
+        return "\n".join([header, separator] + rows)
 
     @staticmethod
     def _yen(value: Any) -> str:
