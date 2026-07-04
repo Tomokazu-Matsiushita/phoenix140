@@ -12,7 +12,14 @@ python3 -m compileall app.py pages services repositories models db connectors ut
 echo "Compile check passed."
 
 python3 - << 'PY'
-from services.financial import FinancialService, SellSimulator, MarketPriceService, PriceHistoryService, AutoSellPlanGenerator
+from services.financial import (
+    FinancialService,
+    SellSimulator,
+    MarketPriceService,
+    PriceHistoryService,
+    AutoSellPlanGenerator,
+    AICFOCommentaryService,
+)
 
 service = FinancialService()
 summary = service.financial_summary()
@@ -34,6 +41,9 @@ print("Price history rows:", len(history))
 
 scenarios = AutoSellPlanGenerator().generate(assets=assets, target_net_cash=3500000)
 print("Auto sell scenarios:", len(scenarios))
+
+review = AICFOCommentaryService().build_review(scenarios, target_net_cash=3500000)
+print("AI CFO recommendation:", review["recommended_name"])
 PY
 
 echo "Service check passed."

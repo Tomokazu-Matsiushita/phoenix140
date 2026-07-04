@@ -6,7 +6,7 @@ import plotly.express as px
 import streamlit as st
 
 from repositories.financial_repository import FinancialRepository
-from services.financial import AutoSellPlanGenerator, MarketPriceService
+from services.financial import AutoSellPlanGenerator, MarketPriceService, AICFOCommentaryService
 from services.formatting import yen
 from utils.style import apply_theme
 
@@ -229,6 +229,24 @@ for scenario in scenarios:
 
 summary_df = pd.DataFrame(summary_rows)
 st.dataframe(summary_df, width="stretch", hide_index=True)
+
+cfo_review = AICFOCommentaryService().build_review(
+    scenarios=scenarios,
+    target_net_cash=float(config["target_net_cash"]),
+)
+
+st.subheader("Phoenix AI CFO コメント")
+if cfo_review["recommended_name"]:
+    st.success(f"推奨案: {cfo_review['recommended_name']}")
+
+st.markdown(cfo_review["executive_summary"])
+
+with st.expander("シナリオ別コメント", expanded=True):
+    for item in cfo_review["scenario_comments"]:
+        badge = "✅" if item["achieved"] else "⚠️"
+        st.markdown(f"#### {badge} {item['name']}")
+        st.markdown(item["comment"])
+
 
 tabs = st.tabs([s.name for s in scenarios])
 
