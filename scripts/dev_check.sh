@@ -47,3 +47,6 @@ print("AI CFO recommendation:", review["recommended_name"])
 PY
 
 echo "Service check passed."
+
+exit_result = ExitIRRService().evaluate(ExitIRRInput())
+print("Exit IRR sample:", exit_result["irr"])
