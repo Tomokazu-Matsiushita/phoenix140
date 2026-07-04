@@ -57,3 +57,7 @@ print("Real Estate AI CFO comments:", len(real_estate_ai_review["comments"]))
 from services.capital_allocation_service import CapitalAllocationInput, CapitalAllocationService
 capital_review = CapitalAllocationService().review(CapitalAllocationInput(target_net_cash=100000))
 print("Capital allocation rows:", len(capital_review["comparison"]))
+
+from services.liquidity_safety_service import LiquiditySafetyInput, LiquiditySafetyService
+liquidity_review = LiquiditySafetyService().review(LiquiditySafetyInput())
+print("Liquidity scenarios:", len(liquidity_review["scenario_review"]))
