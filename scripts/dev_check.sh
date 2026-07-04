@@ -79,3 +79,7 @@ print("PDF memo bytes:", len(pdf_bytes))
 from services.scenario_assumptions_service import ScenarioAssumptionsService
 scenario_assumptions = ScenarioAssumptionsService().load()
 print("Scenario assumptions:", scenario_assumptions.get("scenario_name"))
+
+from services.moneytree import MoneytreeDataService
+moneytree_summary = MoneytreeDataService().portfolio_summary()
+print("Moneytree account count:", moneytree_summary["account_count"])
