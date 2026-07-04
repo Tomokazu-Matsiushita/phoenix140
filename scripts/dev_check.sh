@@ -61,3 +61,7 @@ print("Capital allocation rows:", len(capital_review["comparison"]))
 from services.liquidity_safety_service import LiquiditySafetyInput, LiquiditySafetyService
 liquidity_review = LiquiditySafetyService().review(LiquiditySafetyInput())
 print("Liquidity scenarios:", len(liquidity_review["scenario_review"]))
+
+from services.integrated_ai_cfo_service import IntegratedAICFOService, IntegratedCFOInput
+integrated_review = IntegratedAICFOService().review(IntegratedCFOInput())
+print("Integrated AI CFO decision:", integrated_review["decision"]["label"])
