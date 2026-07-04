@@ -69,3 +69,9 @@ print("Integrated AI CFO decision:", integrated_review["decision"]["label"])
 from services.investment_memo_service import InvestmentMemoInput, InvestmentMemoService
 memo = InvestmentMemoService().build(InvestmentMemoInput())
 print("Investment memo chars:", len(memo["markdown"]))
+
+from services.investment_memo_pdf_service import InvestmentMemoPDFService
+from services.investment_memo_service import InvestmentMemoInput, InvestmentMemoService
+pdf_memo = InvestmentMemoService().build(InvestmentMemoInput())
+pdf_bytes = InvestmentMemoPDFService().build_pdf_bytes(pdf_memo)
+print("PDF memo bytes:", len(pdf_bytes))
