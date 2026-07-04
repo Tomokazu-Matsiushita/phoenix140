@@ -65,3 +65,7 @@ print("Liquidity scenarios:", len(liquidity_review["scenario_review"]))
 from services.integrated_ai_cfo_service import IntegratedAICFOService, IntegratedCFOInput
 integrated_review = IntegratedAICFOService().review(IntegratedCFOInput())
 print("Integrated AI CFO decision:", integrated_review["decision"]["label"])
+
+from services.investment_memo_service import InvestmentMemoInput, InvestmentMemoService
+memo = InvestmentMemoService().build(InvestmentMemoInput())
+print("Investment memo chars:", len(memo["markdown"]))
