@@ -53,3 +53,7 @@ print("Exit IRR sample:", exit_result["irr"])
 
 real_estate_ai_review = RealEstateAICFOService().full_review()
 print("Real Estate AI CFO comments:", len(real_estate_ai_review["comments"]))
+
+from services.capital_allocation_service import CapitalAllocationInput, CapitalAllocationService
+capital_review = CapitalAllocationService().review(CapitalAllocationInput(target_net_cash=100000))
+print("Capital allocation rows:", len(capital_review["comparison"]))
