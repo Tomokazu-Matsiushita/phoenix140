@@ -75,3 +75,7 @@ from services.investment_memo_service import InvestmentMemoInput, InvestmentMemo
 pdf_memo = InvestmentMemoService().build(InvestmentMemoInput())
 pdf_bytes = InvestmentMemoPDFService().build_pdf_bytes(pdf_memo)
 print("PDF memo bytes:", len(pdf_bytes))
+
+from services.scenario_assumptions_service import ScenarioAssumptionsService
+scenario_assumptions = ScenarioAssumptionsService().load()
+print("Scenario assumptions:", scenario_assumptions.get("scenario_name"))
