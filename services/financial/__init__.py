@@ -3,4 +3,5 @@ from services.financial.sell_simulator import SellSimulator, SellSimulationResul
 
 __all__ = ["FinancialService", "SellSimulator", "SellSimulationResult"]
 from services.financial.market_price_service import MarketPriceService
+from services.financial.price_history_service import PriceHistoryService
 

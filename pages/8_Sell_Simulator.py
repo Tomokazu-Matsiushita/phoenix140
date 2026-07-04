@@ -50,6 +50,10 @@ with st.sidebar:
     tax_rate_percent = st.number_input("税率（%）", min_value=0.0, max_value=50.0, value=20.315, step=0.001)
     tax_rate = tax_rate_percent / 100
 
+if "last_price_updated_at" in sellable.columns and sellable["last_price_updated_at"].notna().any():
+    latest_update = sellable["last_price_updated_at"].dropna().max()
+    st.info(f"現在株価の最終更新: {latest_update}")
+
 st.subheader("売却対象を選択")
 
 default_candidates = [

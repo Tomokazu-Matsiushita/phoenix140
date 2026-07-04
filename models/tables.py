@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy import Column, Integer, String, Float, Boolean, Date, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from db.database import Base
@@ -17,6 +18,11 @@ class FinancialAsset(Base):
     value = Column(Float, default=0)
     annual_dividend = Column(Float, default=0)
     policy = Column(String, default="")
+    last_price_updated_at = Column(DateTime, nullable=True)
+    last_price_source = Column(String, nullable=True)
+    previous_price = Column(Float, nullable=True)
+    price_change = Column(Float, nullable=True)
+    price_change_rate = Column(Float, nullable=True)
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
 class Property(Base):
@@ -55,3 +61,15 @@ class MonthlyPropertyCF(Base):
     tax_cost = Column(Float, default=0)
     other_cost = Column(Float, default=0)
     memo = Column(String, default="")
+
+class PriceHistory(Base):
+    __tablename__ = "price_history"
+
+    id = Column(Integer, primary_key=True, index=True)
+    asset_id = Column(Integer, ForeignKey("financial_assets.id"), nullable=True)
+    name = Column(String, nullable=False)
+    ticker = Column(String, nullable=True)
+    price = Column(Float, nullable=False)
+    source = Column(String, nullable=True)
+    recorded_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+

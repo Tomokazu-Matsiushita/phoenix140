@@ -42,6 +42,11 @@ class FinancialRepository:
                     "value": row.value,
                     "annual_dividend": row.annual_dividend,
                     "policy": row.policy,
+                    "last_price_updated_at": getattr(row, "last_price_updated_at", None),
+                    "last_price_source": getattr(row, "last_price_source", None),
+                    "previous_price": getattr(row, "previous_price", None),
+                    "price_change": getattr(row, "price_change", None),
+                    "price_change_rate": getattr(row, "price_change_rate", None),
                 }
                 for row in rows
             ]
