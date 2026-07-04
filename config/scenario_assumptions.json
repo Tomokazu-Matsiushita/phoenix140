@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "scenario_name": "Base Case",
+  "saved_at": "2026-07-04T19:38:04",
+  "memo": {
+    "title": "Phoenix 140 Investment Decision Memo",
+    "author": "Phoenix AI CFO",
+    "purpose": "株式売却による資金確保と不動産取得の可否を総合判断する。"
+  },
+  "safety": {
+    "current_cash": 4856312,
+    "monthly_living_expense": 700000,
+    "emergency_months": 6.0,
+    "property_repair_reserve": 1500000,
+    "tax_reserve": 500000,
+    "other_commitments": 0,
+    "minimum_cash_floor": 2000000
+  },
+  "sale": {
+    "target_net_cash": 4500000,
+    "tax_rate_percent": 20.315,
+    "preserve_names": [
+      "三菱商事",
+      "三井住友FG"
+    ],
+    "preserve_core_policy": true,
+    "shipping_max_sell_ratio": 0.8
+  },
+  "acquisition": {
+    "property_name": "oblige新田町",
+    "purchase_price": 76000000,
+    "loan_amount": 76000000,
+    "annual_interest_rate": 3.0,
+    "loan_years": 34.0,
+    "acquisition_cost_rate": 7.0,
+    "units": 12,
+    "monthly_full_rent": 665000,
+    "vacancy_rate": 8.33,
+    "fixed_asset_tax_annual": 618429,
+    "management_fee_monthly": 59300,
+    "repair_reserve_monthly": 30000
+  },
+  "exit": {
+    "holding_years": 10,
+    "exit_price": 76000000,
+    "annual_cash_flow": 2475987,
+    "initial_cash_required": 5320000,
+    "selling_cost_rate": 4.0,
+    "annual_depreciation": 0,
+    "capital_gain_tax_rate": 20.315
+  }
+}
