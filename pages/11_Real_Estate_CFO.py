@@ -72,23 +72,39 @@ tabs = st.tabs(["Properties", "Units", "Monthly CF", "Loans", "Repairs", "Availa
 
 with tabs[0]:
     df = snapshot["properties"]
-    st.dataframe(df, width="stretch", hide_index=True) if not df.empty else st.info("properties table not found or empty.")
+    if not df.empty:
+        st.dataframe(df, width="stretch", hide_index=True)
+    else:
+        st.info("properties table not found or empty.")
 
 with tabs[1]:
     df = snapshot["units"]
-    st.dataframe(df, width="stretch", hide_index=True) if not df.empty else st.info("units table not found or empty.")
+    if not df.empty:
+        st.dataframe(df, width="stretch", hide_index=True)
+    else:
+        st.info("units table not found or empty.")
 
 with tabs[2]:
     df = snapshot["monthly_cashflows"]
-    st.dataframe(df, width="stretch", hide_index=True) if not df.empty else st.info("monthly cashflow table not found or empty.")
+    if not df.empty:
+        st.dataframe(df, width="stretch", hide_index=True)
+    else:
+        st.info("monthly cashflow table not found or empty.")
 
 with tabs[3]:
     df = snapshot["loans"]
-    st.dataframe(df, width="stretch", hide_index=True) if not df.empty else st.info("loans table not found or empty.")
+    if not df.empty:
+        st.dataframe(df, width="stretch", hide_index=True)
+    else:
+        st.info("loans table not found or empty.")
 
 with tabs[4]:
     df = snapshot["repairs"]
-    st.dataframe(df, width="stretch", hide_index=True) if not df.empty else st.info("repairs table not found or empty.")
+    if not df.empty:
+        st.dataframe(df, width="stretch", hide_index=True)
+    else:
+        st.info("repairs table not found or empty.")
 
 with tabs[5]:
-    st.write(snapshot["available_tables"])
+    tables_df = pd.DataFrame({"table_name": snapshot["available_tables"]})
+    st.dataframe(tables_df, width="stretch", hide_index=True)

@@ -12,7 +12,7 @@ class RealEstateRepository:
     TABLE_CANDIDATES = {
         "properties": ["properties", "real_estate_properties", "property"],
         "units": ["units", "rental_units", "property_units"],
-        "monthly_cashflows": ["monthly_cashflows", "monthly_cash_flows", "cashflows", "cash_flows"],
+        "monthly_cashflows": ["monthly_property_cf", "monthly_cashflows", "monthly_cash_flows", "cashflows", "cash_flows"],
         "loans": ["loans", "property_loans", "real_estate_loans"],
         "repairs": ["repairs", "property_repairs", "maintenance"],
     }

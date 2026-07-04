@@ -50,7 +50,7 @@ class RealEstateCFOService:
         monthly_rent = self._monthly_rent(properties, units, monthly_cf)
         annual_rent = monthly_rent * 12 if monthly_rent is not None else self._annual_rent_from_properties(properties)
 
-        annual_debt_service = self._annual_debt_service(loans, monthly_cf)
+        annual_debt_service = self._annual_debt_service(properties, loans, monthly_cf)
         annual_expense = self._annual_expense(properties, monthly_cf, repairs)
 
         noi = annual_rent - (annual_expense or 0) if annual_rent is not None else None
@@ -122,7 +122,7 @@ class RealEstateCFOService:
             return len(units)
 
         if not properties.empty:
-            col = self._find_col(properties, ["total_units", "unit_count", "rooms", "戸数", "総戸数"])
+            col = self._find_col(properties, ["total_units", "unit_count", "rooms", "units", "戸数", "総戸数"])
             if col:
                 return int(pd.to_numeric(properties[col], errors="coerce").fillna(0).sum())
 
@@ -194,7 +194,16 @@ class RealEstateCFOService:
 
         return None
 
-    def _annual_debt_service(self, loans: pd.DataFrame, monthly_cf: pd.DataFrame) -> float | None:
+    def _annual_debt_service(self, properties: pd.DataFrame, loans: pd.DataFrame, monthly_cf: pd.DataFrame) -> float | None:
+        if not properties.empty:
+            monthly_col = self._find_col(properties, ["monthly_payment", "loan_payment", "返済月額", "月額返済"])
+            annual_col = self._find_col(properties, ["annual_payment", "annual_debt_service", "年間返済額"])
+
+            if annual_col:
+                return float(pd.to_numeric(properties[annual_col], errors="coerce").fillna(0).sum())
+            if monthly_col:
+                return float(pd.to_numeric(properties[monthly_col], errors="coerce").fillna(0).sum() * 12)
+
         if not loans.empty:
             monthly_col = self._find_col(loans, ["monthly_payment", "payment", "loan_payment", "返済月額"])
             annual_col = self._find_col(loans, ["annual_payment", "annual_debt_service", "年間返済額"])
