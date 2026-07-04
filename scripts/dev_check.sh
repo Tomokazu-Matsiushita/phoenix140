@@ -83,3 +83,7 @@ print("Scenario assumptions:", scenario_assumptions.get("scenario_name"))
 from services.moneytree import MoneytreeDataService
 moneytree_summary = MoneytreeDataService().portfolio_summary()
 print("Moneytree account count:", moneytree_summary["account_count"])
+
+from services.phoenix_command_center_service import PhoenixCommandCenterService
+command_center = PhoenixCommandCenterService().build()
+print("Command Center decision:", command_center["snapshot"].decision_label)
