@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 from repositories.financial_repository import FinancialRepository
-from services.financial import SellSimulator
+from services.financial import SellSimulator, MarketPriceService
 from services.formatting import yen
 from utils.style import apply_theme
 
@@ -14,6 +14,16 @@ st.title("🧮 Sell Simulator")
 st.caption("特定口座での税引後手取り・損益通算・配当減少を試算します。")
 
 repo = FinancialRepository()
+
+with st.sidebar:
+    st.header("Market Data")
+    if st.button("現在株価を更新"):
+        with st.spinner("Yahoo Financeから株価を取得しています..."):
+            update_result = MarketPriceService().update_stock_prices()
+        st.success("株価更新が完了しました。")
+        st.dataframe(update_result, width="stretch", hide_index=True)
+        st.rerun()
+
 assets = repo.list_assets()
 
 if assets.empty:

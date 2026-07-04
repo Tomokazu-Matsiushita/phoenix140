@@ -8,7 +8,7 @@ python3 -m compileall app.py pages services repositories models db connectors ut
 echo "Compile check passed."
 
 python3 - << 'PY'
-from services.financial import FinancialService, SellSimulator
+from services.financial import FinancialService, SellSimulator, MarketPriceService
 
 service = FinancialService()
 summary = service.financial_summary()
@@ -20,6 +20,9 @@ result = SellSimulator().simulate(
     sale_plan=[],
 )
 print("Sell simulator empty result:", result.net_proceeds)
+
+provider_ready = MarketPriceService()
+print("Market price service ready:", type(provider_ready).__name__)
 PY
 
 echo "Service check passed."
